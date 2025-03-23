@@ -10,7 +10,7 @@ public class PointService {
 
   private final UserPointTable userPointTable;
 
-  public UserPoint findPoint(long id) {
-    return userPointTable.selectById(id);
+  public UserPoint findPoint(long userId) {
+    return userPointTable.selectById(userId);
   }
 }
