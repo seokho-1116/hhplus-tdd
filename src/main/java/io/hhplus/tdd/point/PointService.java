@@ -2,6 +2,7 @@ package io.hhplus.tdd.point;
 
 import io.hhplus.tdd.database.PointHistoryTable;
 import io.hhplus.tdd.database.UserPointTable;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +35,9 @@ public class PointService {
 
     pointHistoryTable.insert(userId, useAmount, TransactionType.USE, System.currentTimeMillis());
     return usedPoint;
+  }
+
+  public List<PointHistory> findPointHistories(long userId) {
+    return pointHistoryTable.selectAllByUserId(userId);
   }
 }
