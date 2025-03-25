@@ -20,4 +20,14 @@ public class PointService {
   public List<PointHistory> selectAllByUserId(long userId) {
     return pointHistoryTable.selectAllByUserId(userId);
   }
+
+  public UserPoint chargePoint(long userId, long amount) {
+    UserPoint userPoint = userPointTable.selectById(userId);
+
+    UserPoint chargedUserPoint = userPoint.chargePoint(amount);
+    userPointTable.insertOrUpdate(userId, chargedUserPoint.point());
+
+    pointHistoryTable.insert(userId, amount, TransactionType.CHARGE, chargedUserPoint.updateMillis());
+    return chargedUserPoint;
+  }
 }
