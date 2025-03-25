@@ -27,4 +27,16 @@ public record UserPoint(
 
         return new UserPoint(id, point + amount, System.currentTimeMillis());
     }
+
+    public UserPoint usePoint(long amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("음수 포인트는 사용할 수 없습니다.");
+        }
+
+        if (point - amount < 0) {
+            throw new IllegalArgumentException("포인트가 부족합니다.");
+        }
+
+        return new UserPoint(id, point - amount, System.currentTimeMillis());
+    }
 }
